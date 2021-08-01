@@ -20,6 +20,14 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    @Transactional // 변경감지 예시
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+    }
+
     public List<Item> findItems() {
         return itemRepository.findAll();
     }
