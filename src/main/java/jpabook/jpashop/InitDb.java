@@ -1,13 +1,12 @@
 package jpabook.jpashop;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import jpabook.jpashop.domain.*;
 import jpabook.jpashop.domain.item.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 
 /**
  * userA
