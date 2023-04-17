@@ -8,11 +8,16 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 회원
+ */
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "member_id")
     private Long id;
 

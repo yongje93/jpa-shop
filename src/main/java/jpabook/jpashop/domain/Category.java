@@ -8,6 +8,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 카테고리
+ */
 @Entity
 @Getter
 @Setter

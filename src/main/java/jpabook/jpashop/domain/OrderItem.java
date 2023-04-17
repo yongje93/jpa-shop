@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * 주문 상품
+ */
 @Entity
 @Getter
 @Setter

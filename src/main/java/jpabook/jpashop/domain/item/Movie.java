@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 영화
+ */
 @Entity
 @DiscriminatorValue("M")
 @Getter @Setter

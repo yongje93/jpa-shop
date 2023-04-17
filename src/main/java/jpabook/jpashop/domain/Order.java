@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 주문
+ */
 @Entity
 @Table(name = "orders")
 @Getter
@@ -31,7 +34,7 @@ public class Order {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
-    private Delivery delivery;
+    private Delivery delivery; // 배송정보
 
     private LocalDateTime orderDate; // 주문시간
 
