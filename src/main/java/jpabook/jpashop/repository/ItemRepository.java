@@ -14,6 +14,7 @@ public class ItemRepository {
     private final EntityManager em;
 
     public void save(Item item) {
+        // 처음에 넣는 경우 상품의 ID 값이 없음
         if (item.getId() == null) {
             em.persist(item);
         } else {    // update와 비슷
