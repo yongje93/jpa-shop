@@ -32,7 +32,6 @@ public class OrderRepository {
     }
 
     public List<Order> findAllByString(OrderSearch orderSearch) {
-        //language=JPAQL
         String jpql = "select o From Order o join o.member m";
         boolean isFirstCondition = true;
 
@@ -91,7 +90,7 @@ public class OrderRepository {
 
         // 회원 이름 검색
         if (StringUtils.hasText(orderSearch.getMemberName())) {
-            Predicate name = cb.like(m.<String>get("name"), "%" + orderSearch.getMemberName() + "%");
+            Predicate name = cb.like(m.get("name"), "%" + orderSearch.getMemberName() + "%");
             criteria.add(name);
         }
 

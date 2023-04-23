@@ -34,8 +34,6 @@ public class OrderItem {
     private int orderPrice; // 주문 가격
     private int count; // 주문 수량
 
-   // protected OrderItem() { }
-
     //==생성 메서드==//
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         OrderItem orderItem = new OrderItem();
@@ -48,7 +46,7 @@ public class OrderItem {
     }
 
     //==비즈니스 로직==//
-    public void cancel() {
+    public void cancel() { // 재고 개수 원복
         getItem().addStock(count);
     }
 
