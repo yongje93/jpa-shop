@@ -20,7 +20,10 @@ public class ItemService {
         itemRepository.save(item);
     }
 
-    @Transactional // 변경감지 예시
+    /**
+     * 영속성 컨텍스트가 자동 변경 (변경 감지)
+     */
+    @Transactional
     public void updateItem(Long itemId, String name, int price, int stockQuantity) {
         Item findItem = itemRepository.findOne(itemId);
         findItem.setName(name);

@@ -17,8 +17,8 @@ public class ItemRepository {
         // 처음에 넣는 경우 상품의 ID 값이 없음
         if (item.getId() == null) {
             em.persist(item);
-        } else {    // update와 비슷
-            em.merge(item);
+        } else {
+            em.merge(item); // 병합(merge)
         }
     }
 
