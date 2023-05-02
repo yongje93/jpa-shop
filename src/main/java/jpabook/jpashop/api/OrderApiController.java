@@ -4,7 +4,8 @@ import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.OrderStatus;
-import jpabook.jpashop.repository.*;
+import jpabook.jpashop.repository.OrderRepository;
+import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.repository.order.query.OrderFlatDto;
 import jpabook.jpashop.repository.order.query.OrderItemQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryDto;
@@ -54,10 +55,11 @@ public class OrderApiController {
      */
     @GetMapping("/api/v1/orders")
     public List<Order> ordersV1() {
-        List<Order> all = orderRepository.findAll();
+        List<Order> all = orderRepository.findAllByString(new OrderSearch());
         for (Order order : all) {
             order.getMember().getName(); //Lazy 강제 초기화
             order.getDelivery().getAddress(); //Lazy 강제 초기환
+
             List<OrderItem> orderItems = order.getOrderItems();
             orderItems.stream().forEach(o -> o.getItem().getName()); //Lazy 강제 초기화
         }
@@ -67,21 +69,19 @@ public class OrderApiController {
     @GetMapping("/api/v2/orders")
     public List<OrderDto> ordersV2() {
         List<Order> orders = orderRepository.findAll();
-        List<OrderDto> result = orders.stream()
-                .map(o -> new OrderDto(o))
-                .collect(toList());
 
-        return result;
+        return orders.stream()
+                .map(OrderDto::new)
+                .collect(toList());
     }
 
     @GetMapping("/api/v3/orders")
     public List<OrderDto> ordersV3() {
         List<Order> orders = orderRepository.findAllWithItem();
-        List<OrderDto> result = orders.stream()
-                .map(o -> new OrderDto(o))
-                .collect(toList());
 
-        return result;
+        return orders.stream()
+                .map(OrderDto::new)
+                .collect(toList());
     }
 
     /**
@@ -128,7 +128,7 @@ public class OrderApiController {
 
         private Long orderId;
         private String name;
-        private LocalDateTime orderDate; //주문시간
+        private LocalDateTime orderDate;
         private OrderStatus orderStatus;
         private Address address;
         private List<OrderItemDto> orderItems;
@@ -140,7 +140,7 @@ public class OrderApiController {
             orderStatus = order.getStatus();
             address = order.getDelivery().getAddress();
             orderItems = order.getOrderItems().stream()
-                    .map(orderItem -> new OrderItemDto(orderItem))
+                    .map(OrderItemDto::new)
                     .collect(toList());
         }
     }
