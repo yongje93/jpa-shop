@@ -94,11 +94,10 @@ public class OrderApiController {
                                         @RequestParam(value = "limit", defaultValue = "100") int limit) {
 
         List<Order> orders = orderRepository.findAllWithMemberDelivery(offset, limit);
-        List<OrderDto> result = orders.stream()
-                .map(o -> new OrderDto(o))
-                .collect(toList());
 
-        return result;
+        return orders.stream()
+                .map(OrderDto::new)
+                .collect(toList());
     }
 
     @GetMapping("/api/v4/orders")
@@ -148,9 +147,9 @@ public class OrderApiController {
     @Data
     static class OrderItemDto {
 
-        private String itemName;//상품 명
-        private int orderPrice; //주문 가격
-        private int count;      //주문 수량
+        private String itemName;
+        private int orderPrice;
+        private int count;
 
         public OrderItemDto(OrderItem orderItem) {
             itemName = orderItem.getItem().getName();
